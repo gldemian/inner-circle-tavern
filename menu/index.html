@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu | Inner Circle Tavern</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@300;500;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --brand-black: #000000;
+      --brand-midnight: #0A0A0A;
+      --brand-gray: #1A1A1A;
+      --brand-platinum: #E5E5E5;
+      --brand-white: #FFFFFF;
+    }
+
+    body {
+      background-color: var(--brand-black);
+      color: var(--brand-white);
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .heading-font {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--brand-black);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--brand-gray);
+      border-radius: 10px;
+    }
+
+    /* Hide horizontal scrollbar for category tabs */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .category-tab {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border-bottom: 2px solid transparent;
+      opacity: 0.4;
+    }
+
+    .category-tab.active {
+      border-color: var(--brand-white);
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    .menu-section {
+      scroll-margin-top: 100px;
+    }
+
+    .dietary-icon {
+      width: 16px;
+      height: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      vertical-align: middle;
+      margin-left: 6px;
+    }
+
+    .ic-ring {
+      stroke-dasharray: 2 2;
+      opacity: 0.3;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.5);
+    }
+
+    .menu-item-price {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #back-to-top {
+      transition: all 0.3s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  </style>
+</head>
+
+<body class="px-6 md:px-12 pt-6 md:pt-12 pb-24 max-w-5xl mx-auto space-y-10">
+
+  <!-- Header -->
+  <header class="flex justify-between items-center border-b border-white/10 pb-6">
+    <h1 class="heading-font text-2xl font-bold uppercase tracking-[0.2em]">Inner Circle Tavern</h1>
+    <nav>
+      <a href="../"
+        class="text-xs uppercase tracking-widest font-bold border border-white/20 px-4 py-2 rounded-full hover:bg-white hover:text-black transition-colors">Home</a>
+    </nav>
+  </header>
+
+  <!-- Navigation (Sticky Menu Control Center) -->
+  <nav class="sticky-nav !mt-0 -mx-6 md:-mx-12 px-6 md:px-12">
+    <div class="max-w-5xl mx-auto py-4 flex flex-col lg:flex-row items-center gap-4 lg:gap-6">
+      <!-- Main Menu Toggle -->
+      <div class="flex-shrink-0 w-full lg:w-auto max-w-[240px]">
+        <div class="flex bg-white/5 rounded-full p-1 border border-white/10 backdrop-blur-md">
+          <button onclick="switchMenu('food')" id="food-btn"
+            class="flex-1 py-2 px-10 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-500 bg-white text-black shadow-lg">
+            Food
+          </button>
+          <button onclick="switchMenu('drinks')" id="drinks-btn"
+            class="flex-1 py-2 px-10 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-500 text-white/40 hover:text-white">
+            Drinks
+          </button>
+        </div>
+      </div>
+
+      <!-- Category Tabs (The sub-navigation) -->
+      <div id="category-tabs" class="w-full flex gap-2 overflow-x-auto no-scrollbar items-center justify-start">
+        <!-- Tabs injected via JS -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- Menu Content -->
+  <main class="space-y-24" id="menu-content">
+    <!-- Content will be injected via JS -->
+  </main>
+
+  <!-- Dietary Key -->
+  <section class="mt-32 pt-16 border-t border-white/10">
+    <h3 class="heading-font text-[10px] font-bold uppercase tracking-[0.3em] mb-10 opacity-30 text-center">Dietary Guide
+    </h3>
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-3xl mx-auto">
+      <div
+        class="flex flex-col items-center gap-3 text-[10px] text-white/40 uppercase tracking-widest text-center group">
+        <div
+          class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white/30 transition-colors">
+          <svg viewBox="0 0 24 24" class="w-5 h-5 text-white/60" fill="none" stroke="currentColor" stroke-width="1.2">
+            <circle cx="12" cy="12" r="11" stroke-dasharray="2 2" opacity="0.3" />
+            <circle cx="12" cy="12" r="5" />
+            <path d="M12 7v10M7 12h10" />
+          </svg>
+        </div>
+        <span>Nuts</span>
+      </div>
+      <div
+        class="flex flex-col items-center gap-3 text-[10px] text-white/40 uppercase tracking-widest text-center group">
+        <div
+          class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white/30 transition-colors">
+          <svg viewBox="0 0 24 24" class="w-5 h-5 text-white/60" fill="none" stroke="currentColor" stroke-width="1.2">
+            <circle cx="12" cy="12" r="11" stroke-dasharray="2 2" opacity="0.3" />
+            <path d="M12 5 v14 M12 5 a 3 3 0 0 0 -3 3 v1 a 3 3 0 0 0 3 3 a 3 3 0 0 0 3 -3 v -1 a 3 3 0 0 0 -3 -3" />
+          </svg>
+        </div>
+        <span>Veg</span>
+      </div>
+      <div
+        class="flex flex-col items-center gap-3 text-[10px] text-white/40 uppercase tracking-widest text-center group">
+        <div
+          class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white/30 transition-colors">
+          <svg viewBox="0 0 24 24" class="w-5 h-5 text-white/60" fill="none" stroke="currentColor" stroke-width="1.2">
+            <circle cx="12" cy="12" r="11" stroke-dasharray="2 2" opacity="0.3" />
+            <path d="M7 15 C 7 15 8 10 12 10 S 17 15 17 15" />
+            <path d="M12 10 L 12 7 M 10 8 L 12 7 L 14 8" />
+          </svg>
+        </div>
+        <span>Vegan</span>
+      </div>
+      <div
+        class="flex flex-col items-center gap-3 text-[10px] text-white/40 uppercase tracking-widest text-center group">
+        <div
+          class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white/30 transition-colors">
+          <svg viewBox="0 0 24 24" class="w-5 h-5 text-white/60" fill="none" stroke="currentColor" stroke-width="1.2">
+            <circle cx="12" cy="12" r="11" stroke-dasharray="2 2" opacity="0.3" />
+            <path d="M8 8 L 16 16 M 16 8 L 8 16" />
+            <path d="M12 6 a 3 3 0 0 1 3 3 v 3 a 3 3 0 0 1 -3 3 a 3 3 0 0 1 -3 -3 v -3 a 3 3 0 0 1 3 -3" />
+          </svg>
+        </div>
+        <span>Dairy Free</span>
+      </div>
+      <div
+        class="flex flex-col items-center gap-3 text-[10px] text-white/40 uppercase tracking-widest text-center group">
+        <div
+          class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white/30 transition-colors">
+          <svg viewBox="0 0 24 24" class="w-5 h-5 text-white/60" fill="none" stroke="currentColor" stroke-width="1.2">
+            <circle cx="12" cy="12" r="11" stroke-dasharray="2 2" opacity="0.3" />
+            <path d="M12 5 v14 M12 5 a 3 3 0 0 0 -3 3 v1 a 3 3 0 0 0 3 3 a 3 3 0 0 0 3 -3 v -1 a 3 3 0 0 0 -3 -3" />
+            <path d="M5 5 L 19 19" />
+          </svg>
+        </div>
+        <span>Gluten Free</span>
+      </div>
+    </div>
+    <div class="mt-20 space-y-4 max-w-2xl mx-auto">
+      <p class="text-[10px] text-white/30 uppercase tracking-[0.2em] text-center italic">
+        * Please alert staff of any dietary restrictions or allergies *
+      </p>
+      <p class="text-[9px] text-white/15 uppercase tracking-widest text-center leading-relaxed">
+        Consuming raw or undercooked meats, poultry, seafood, shellfish or eggs may increase your risk of foodborne
+        illness.
+      </p>
+    </div>
+  </section>
+
+  <!-- Back to top -->
+  <button id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+    class="fixed bottom-8 right-8 w-12 h-12 bg-white text-black rounded-full flex items-center justify-center shadow-2xl z-[60] hover:scale-110 active:scale-95 transition-all">
+    <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M18 15l-6-6-6 6" />
+    </svg>
+  </button>
+
+  <script>
+    const menus = {
+      food: {
+        categories: ["Boards", "Salads", "Small Plates", "Entrées"],
+        data: [
+          {
+            category: "Boards",
+            items: [
+              { name: "Bread", price: "10", desc: "house crusty bread + herb olive oil", tags: ["V", "VG"] },
+              { name: "Meat & Cheese", price: "32", desc: "assorted cured meat, artisan cheeses, house pickles, seasonal spreads, nuts", tags: ["N"] },
+              { name: "Hummus & Veg", price: "16", desc: "chef's flavor hummus, seasonal veggies, house made pita, served warm", tags: ["V", "VG"] }
+            ]
+          },
+          {
+            category: "Salads",
+            items: [
+              { name: "Beet & Citrus", price: "14", desc: "blood orange citrus braised beets, whipped feta, pumpernickel crumb, candied walnuts, citrus vinaigrette", tags: ["N", "V"] },
+              { name: "Caesar", price: "12", desc: "gem lettuce, heirloom tomato, red onion, sourdough crouton, crispy capers, caesar dressing", tags: [] },
+              { name: "Inner Circle", price: "12", desc: "mixed greens, cucumber, heirloom tomato, radish, feta, pumpernickel crouton, garlic herb vinaigrette", tags: ["V"] }
+            ]
+          },
+          {
+            category: "Small Plates",
+            items: [
+              { name: "Lamb Chops", price: "34", desc: "black garlic hummus, chickpea lentil salad, garlic herb crema", tags: ["GF"] },
+              { name: "Tuna Tataki", price: "28", desc: "sesame crusted, cucumber salad, ponzu caramel", tags: ["GF"] },
+              { name: "Deviled Tea Eggs", price: "10", desc: "black miso, pistachio chili crisp, chives", tags: ["N"] },
+              { name: "Chef's Pâté", price: "18", desc: "liver pâté, castelvetrano olive tapenade, crusty bread", tags: [] },
+              { name: "P.E.I. Mussels", price: "22", desc: "calabrian chili butter, white wine, shallot, garlic, crusty bread", tags: [] },
+              { name: "Crab Claw Cocktail", price: "32", desc: "old bay butter poached, cocktail sauce, green goddess", tags: ["GF"] },
+              { name: "Roasted Carrots", price: "18", desc: "stracciatella, nduja, pistachio, herbs", tags: ["N", "V"] },
+              { name: "Crispy Mushroom", price: "16", desc: "tempura battered, togarashi, chili crisp aioli, ponzu", tags: ["DF", "VG"] },
+              { name: "Cipollini Onion Torta", price: "16", desc: "wild mushroom, taleggio fonduta, parmigiano reggiano", tags: ["V"] },
+              { name: "Onion Roulade", price: "14", desc: "mushroom lentil ragù, harissa tomato sauce", tags: ["V", "VG"] }
+            ]
+          },
+          {
+            category: "Entrées",
+            items: [
+              { name: "Steak Au Poivre", price: "55", desc: "pepper crusted, potato pavé, demi glace, charred carrot, bourbon peppercorn cream", tags: ["GF"] },
+              { name: "Chicken & Dumplings", price: "36", desc: "chicken fat gnocchi, cardamom roasted carrot and onion, chicken demi, puff pastry", tags: [] },
+              { name: "Bone Marrow Carbonara", price: "38", desc: "beef bacon, cured egg yolk, parmigiano reggiano, black pepper, herbs", tags: [] },
+              { name: "Ibérico Pork Secreto", price: "42", desc: "smoked romesco, wild mushroom farro pilaf, charred chicories, pistachio pesto", tags: ["N", "GF"] },
+              { name: "Chef's Fish of the Day", price: "MKT", desc: "seasonal fish, chef's choice of set", tags: ["GF"] },
+              { name: "Beef Short Ribs", price: "45", desc: "broccoli herb purée, spicy peanuts, fish sauce gastrique, crispy sweet potato", tags: ["N", "GF"] },
+              { name: "Spaghetti Squash", price: "24", desc: "puttanesca, pine nuts, herbs", tags: ["V", "VG", "N"] }
+            ]
+          }
+        ]
+      },
+      drinks: {
+        categories: ["Cocktails", "Non Alc", "Beer & Seltzer", "Bubbles", "Wine Glass", "Wine Bottle"],
+        data: [
+          {
+            category: "Cocktails",
+            items: [
+              { name: "Strawberry Medicine", price: "14", desc: "dewars, strawberry, ginger honey syrup, lemon, ardbeg float" },
+              { name: "Smoking Kitty", price: "12", desc: "el jimador blanco, dry curaçao, prickly pear agave syrup, lime" },
+              { name: "Forbidden Bat", price: "14", desc: "bacardi 8, frangelico, cold brew, rice milk, cinnamon syrup" },
+              { name: "Aqueduct", price: "12", desc: "watershed vodka, dry curaçao, apricot liqueur, lime" },
+              { name: "Añejo Manhattan", price: "15", desc: "espolon añejo, cocchi sweet vermouth, angostura, luxardo cherry" },
+              { name: "#271", price: "15", desc: "woodford reserve, benedictine, honey syrup, lemon, blood orange bitters" },
+              { name: "Ed Sheeran's Twin", price: "14", desc: "four peel gin, st. germain, grapefruit, honey thyme syrup, salt and sugar rim" },
+              { name: "Coffee Rum Thing", price: "15", desc: "appleton estate, cold brew concentrate, cinnamon syrup, coffee bitters" },
+              { name: "Drunken Pilot", price: "18", desc: "smith & cross rum, bacardi 8, planteray pineapple, falernum, cinnamon syrup, grapefruit, lime, absinthe, bitters" }
+            ]
+          },
+          {
+            category: "Non Alc",
+            items: [
+              { name: "Erie Dragon", price: "12", desc: "ginseng green tea, lemon, honey syrup" },
+              { name: "TropaColada", price: "12", desc: "pineapple, orange, coconut, passionfruit, lime" }
+            ]
+          },
+          {
+            category: "Beer & Seltzer",
+            items: [
+              { name: "Bell's Two Hearted", price: "7" },
+              { name: "Great Lakes Dortmunder", price: "7" },
+              { name: "Columbus Bodhi", price: "8" },
+              { name: "Guinness", price: "8" },
+              { name: "Miller Lite", price: "5" },
+              { name: "High Noon", price: "8", desc: "Grapefruit or Peach" },
+              { name: "Downeast Original", price: "7" },
+              { name: "Athletic Golden Ale", price: "6", desc: "Non-Alcoholic" }
+            ]
+          },
+          {
+            category: "Bubbles",
+            items: [
+              { name: "Canella Prosecco", price: "11", desc: "Italy" },
+              { name: "Scarpetta Lambrusco", price: "8", desc: "Italy" },
+              { name: "Scarpetta Frico", price: "8", desc: "Italy" }
+            ]
+          },
+          {
+            category: "Wine Glass",
+            items: [
+              { name: "Bargemone Rose", price: "14 | 56", desc: "France (BTG | BTB)" },
+              { name: "Qupe Chardonnay", price: "14 | 56", desc: "California (BTG | BTB)" },
+              { name: "Chemistry Pinot Gris", price: "12 | 48", desc: "Oregon (BTG | BTB)" },
+              { name: "Wither Hills Sauv Blanc", price: "12 | 48", desc: "New Zealand (BTG | BTB)" },
+              { name: "Richter Riesling", price: "14 | 56", desc: "Germany (BTG | BTB)" },
+              { name: "Growers Guild Pinot Noir", price: "12 | 48", desc: "Oregon (BTG | BTB)" },
+              { name: "Sin Zin Zinfandel", price: "10 | 40", desc: "California (BTG | BTB)" },
+              { name: "Luigi Bosca Malbec", price: "13 | 52", desc: "Argentina (BTG | BTB)" },
+              { name: "Alexander Valley Cab", price: "15 | 60", desc: "California (BTG | BTB)" }
+            ]
+          },
+          {
+            category: "Wine Bottle",
+            items: [
+              { name: "Roederer Estate Brut", price: "90", desc: "Anderson Valley" },
+              { name: "Bernard Remy Champagne", price: "150", desc: "Brut Carte Blanche" },
+              { name: "The Hilt Chardonnay", price: "90", desc: "California" },
+              { name: "Domaines Ott Rosé", price: "85", desc: "Provence, France" },
+              { name: "Richter Riesling Spätlese", price: "100", desc: "Germany" },
+              { name: "Belle Glos Pinot Noir", price: "90", desc: "California" },
+              { name: "Caymus Cabernet", price: "225", desc: "Napa Valley (1L)" },
+              { name: "Tedeschi Amarone", price: "190", desc: "Italy" },
+              { name: "Damilano Barolo", price: "220", desc: "Italy" }
+            ]
+          }
+        ]
+      }
+    };
+
+    const icons = {
+      N: `<svg class="dietary-icon text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="11" class="ic-ring" stroke-width="1"/><circle cx="12" cy="12" r="5" stroke-width="1.2"/><path d="M12 7v10M7 12h10" stroke-width="1.2"/></svg>`,
+      V: `<svg class="dietary-icon text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="11" class="ic-ring" stroke-width="1"/><path d="M12 5 v14 M12 5 a 3 3 0 0 0 -3 3 v1 a 3 3 0 0 0 3 3 a 3 3 0 0 0 3 -3 v -1 a 3 3 0 0 0 -3 -3" stroke-width="1.2"/></svg>`,
+      VG: `<svg class="dietary-icon text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="11" class="ic-ring" stroke-width="1"/><path d="M7 15 C 7 15 8 10 12 10 S 17 15 17 15" stroke-width="1.2"/><path d="M12 10 L 12 7 M 10 8 L 12 7 L 14 8" stroke-width="1.2"/></svg>`,
+      DF: `<svg class="dietary-icon text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="11" class="ic-ring" stroke-width="1"/><path d="M8 8 L 16 16 M 16 8 L 8 16" stroke-width="1.2"/><path d="M12 6 a 3 3 0 0 1 3 3 v 3 a 3 3 0 0 1 -3 3 a 3 3 0 0 1 -3 -3 v -3 a 3 3 0 0 1 3 -3" stroke-width="1.2"/></svg>`,
+      GF: `<svg class="dietary-icon text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="11" class="ic-ring" stroke-width="1"/><path d="M12 5 v14 M12 5 a 3 3 0 0 0 -3 3 v1 a 3 3 0 0 0 3 3 a 3 3 0 0 0 3 -3 v -1 a 3 3 0 0 0 -3 -3" stroke-width="1.2"/><path d="M5 5 L 19 19" stroke-width="1.2"/></svg>`
+    };
+
+    let currentMenu = 'food';
+
+    function switchMenu(type) {
+      if (currentMenu === type) return;
+
+      // Block observer updates during the transition scroll
+      isManualClick = true;
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => { isManualClick = false; }, 1000);
+
+      currentMenu = type;
+      const foodBtn = document.getElementById('food-btn');
+      const drinksBtn = document.getElementById('drinks-btn');
+
+      const activeClass = "flex-1 py-2 px-10 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-500 bg-white text-black shadow-lg";
+      const inactiveClass = "flex-1 py-2 px-10 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-500 text-white/40 hover:text-white";
+
+      if (type === 'food') {
+        foodBtn.className = activeClass;
+        drinksBtn.className = inactiveClass;
+      } else {
+        drinksBtn.className = activeClass;
+        foodBtn.className = inactiveClass;
+      }
+
+      renderMenu();
+
+      // Ensure tabs are scrolled to the far left and auto-select first category
+      const nav = document.getElementById('category-tabs');
+      if (nav) nav.scrollLeft = 0;
+
+      const firstCategory = menus[type].categories[0].replace(/\s+/g, '-').toLowerCase();
+      setActiveTab(firstCategory, true);
+
+      const menuContent = document.getElementById('menu-content');
+      if (menuContent) {
+        menuContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function renderMenu() {
+      const nav = document.getElementById('category-tabs');
+      const content = document.getElementById('menu-content');
+      const menuData = menus[currentMenu];
+
+      // Render Tabs
+      nav.innerHTML = menuData.categories.map((cat, i) => {
+        const id = cat.replace(/\s+/g, '-').toLowerCase();
+        return `
+          <a href="#${id}" onclick="setActiveTab('${id}', true)" 
+             class="category-tab whitespace-nowrap py- px-2 text-[10px] font-bold uppercase tracking-[0.2em] text-white hover:opacity-100 ${i === 0 ? 'active' : ''}">
+            ${cat}
+          </a>
+        `;
+      }).join('');
+
+      // Render Content
+      content.innerHTML = menuData.data.map((sec, secIdx) => `
+        <section id="${sec.category.replace(/\s+/g, '-').toLowerCase()}" class="menu-section">
+          <div class="flex items-center gap-6 mb-12">
+            <h2 class="heading-font text-2xl font-bold uppercase tracking-[0.3em]">${sec.category}</h2>
+            <span class="flex-1 h-[1px] bg-gradient-to-r from-white/20 to-transparent"></span>
+          </div>
+          <div class="grid md:grid-cols-2 gap-x-12 gap-y-10">
+            ${sec.items.map(item => `
+              <div class="glass-card p-8 rounded-3xl group">
+                <div class="flex justify-between items-start gap-4 mb-3">
+                  <h3 class="heading-font font-bold text-xl leading-tight uppercase tracking-wide group-hover:text-white transition-colors">
+                    ${item.name}
+                    ${(item.tags || []).map(t => icons[t]).join('')}
+                  </h3>
+                  <div class="menu-item-price heading-font font-bold text-lg text-white/90 bg-white/5 px-3 py-1 rounded-lg border border-white/5">
+                    ${item.price || '--'}
+                  </div>
+                </div>
+                ${item.desc ? `<p class="text-white/40 text-[13px] leading-relaxed font-light tracking-wide italic">${item.desc}</p>` : ''}
+              </div>
+            `).join('')}
+          </div>
+        </section>
+      `).join('');
+
+      // Re-initialize intersection observer
+      setupObserver();
+    }
+
+    let isManualClick = false;
+    let scrollTimeout;
+
+    function setActiveTab(id, fromClick = false) {
+      if (fromClick) {
+        isManualClick = true;
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => { isManualClick = false; }, 800);
+      }
+
+      if (isManualClick && !fromClick) return;
+
+      const tabs = document.querySelectorAll('.category-tab');
+      tabs.forEach(tab => {
+        const isActive = tab.getAttribute('href').slice(1) === id;
+        if (isActive) {
+          if (!tab.classList.contains('active')) {
+            tab.classList.add('active');
+            tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }
+        } else {
+          tab.classList.remove('active');
+        }
+      });
+    }
+
+    function setupObserver() {
+      const sections = document.querySelectorAll('.menu-section');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setActiveTab(entry.target.id);
+          }
+        });
+      }, { threshold: 0, rootMargin: '-10% 0px -85% 0px' });
+
+      sections.forEach(s => observer.observe(s));
+    }
+
+    // Back to top visibility
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('back-to-top');
+      if (window.scrollY > 500) {
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+    });
+
+    // Initial render
+    renderMenu();
+  </script>
+</body>
+
+</html>
