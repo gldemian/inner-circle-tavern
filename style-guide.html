@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InnerCircle | Brand Style Guide</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@300;500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --brand-black: #0F0F0F;
+      --brand-white: #FFFFFF;
+      --brand-gray: #2D2D2D;
+      --brand-accent: #E5E5E5;
+    }
+
+    body {
+      background-color: var(--brand-black);
+      color: var(--brand-white);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .heading-font {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* Custom SVG Icon Styling */
+    .ic-icon {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .ic-ring {
+      stroke-dasharray: 4 4;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+
+<body class="p-8 md:p-16">
+
+  <header class="max-w-6xl mx-auto border-b border-white/10 pb-12 mb-16">
+    <div class="flex items-center gap-6 mb-4">
+      <!-- Reconstructed SVG Logo -->
+      <svg width="80" height="80" viewBox="0 0 100 100" class="text-white">
+        <circle cx="50" cy="50" r="30" stroke="currentColor" stroke-width="2" fill="none" />
+        <circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="1.5" fill="none" stroke-dasharray="10 5" />
+        <path d="M75 50 A 25 25 0 0 1 50 75" stroke="currentColor" stroke-width="2.5" fill="none" />
+      </svg>
+      <div>
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tighter heading-font">InnerCircle</h1>
+        <p class="text-white/50 tracking-widest uppercase text-sm mt-2">Brand Identity & Style Guide</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto space-y-24">
+
+    <!-- Typography Section -->
+    <section id="typography">
+      <h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
+        <span class="w-8 h-[1px] bg-white"></span> Typography
+      </h2>
+      <div class="grid md:grid-cols-2 gap-12">
+        <div class="space-y-6">
+          <div>
+            <p class="text-xs text-white/40 mb-2 uppercase">Primary Heading / Outfit Bold</p>
+            <h3 class="heading-font text-5xl font-bold">The Art of the Table.</h3>
+          </div>
+          <div>
+            <p class="text-xs text-white/40 mb-2 uppercase">Subheading / Outfit Medium</p>
+            <h4 class="heading-font text-2xl font-medium text-white/80">Exclusive dining, curated for the few.</h4>
+          </div>
+        </div>
+        <div class="space-y-6">
+          <div>
+            <p class="text-xs text-white/40 mb-2 uppercase">Body Text / Inter Regular</p>
+            <p class="text-lg leading-relaxed text-white/60">
+              InnerCircle represents the intersection of geometric precision and culinary warmth.
+              Our typography should always feel airy, balanced, and deliberately modern.
+            </p>
+          </div>
+          <div class="flex gap-4">
+            <span
+              class="px-4 py-2 border border-white/20 rounded-full text-xs font-mono uppercase tracking-widest">Inter
+              Light</span>
+            <span
+              class="px-4 py-2 border border-white/20 rounded-full text-xs font-mono uppercase tracking-widest">Inter
+              Medium</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Color Palette Section -->
+    <section id="colors">
+      <h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
+        <span class="w-8 h-[1px] bg-white"></span> Color Palette
+      </h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="space-y-2">
+          <div class="h-32 bg-black border border-white/20 rounded-lg"></div>
+          <p class="text-sm font-bold">Obsidian Black</p>
+          <p class="text-xs font-mono text-white/40">#000000</p>
+        </div>
+        <div class="space-y-2">
+          <div class="h-32 bg-white rounded-lg"></div>
+          <p class="text-sm font-bold text-white">Pure White</p>
+          <p class="text-xs font-mono text-white/40">#FFFFFF</p>
+        </div>
+        <div class="space-y-2">
+          <div class="h-32 bg-[#1A1A1A] rounded-lg"></div>
+          <p class="text-sm font-bold text-white">Midnight Gray</p>
+          <p class="text-xs font-mono text-white/40">#1A1A1A</p>
+        </div>
+        <div class="space-y-2">
+          <div class="h-32 bg-[#E5E5E5] rounded-lg"></div>
+          <p class="text-sm font-bold text-white">Platinum</p>
+          <p class="text-xs font-mono text-white/40">#E5E5E5</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Custom Icon Set Section -->
+    <section id="icons">
+      <div class="mb-8">
+        <h2 class="text-2xl font-bold mb-2 flex items-center gap-3">
+          <span class="w-8 h-[1px] bg-white"></span> Restaurant Iconography
+        </h2>
+        <p class="text-white/40">Custom SVGs utilizing the circular dash-and-ring language.</p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <!-- Menu Icon -->
+        <div class="bg-white/5 p-8 rounded-2xl flex flex-col items-center gap-4 group transition-all hover:bg-white/10">
+          <svg width="48" height="48" viewBox="0 0 24 24" class="ic-icon text-white">
+            <circle cx="12" cy="12" r="11" class="ic-ring" />
+            <path d="M7 8h10M7 12h10M7 16h6" stroke-width="1.5" />
+            <circle cx="12" cy="12" r="11" stroke-width="0.5" />
+          </svg>
+          <span class="text-xs uppercase tracking-widest font-bold">Curated Menu</span>
+        </div>
+
+        <!-- Reservation Icon -->
+        <div class="bg-white/5 p-8 rounded-2xl flex flex-col items-center gap-4 group transition-all hover:bg-white/10">
+          <svg width="48" height="48" viewBox="0 0 24 24" class="ic-icon text-white">
+            <circle cx="12" cy="12" r="11" class="ic-ring" />
+            <path d="M12 7v5l3 2" />
+            <circle cx="12" cy="12" r="11" stroke-width="0.5" />
+          </svg>
+          <span class="text-xs uppercase tracking-widest font-bold">Reservations</span>
+        </div>
+
+        <!-- Location Icon -->
+        <div class="bg-white/5 p-8 rounded-2xl flex flex-col items-center gap-4 group transition-all hover:bg-white/10">
+          <svg width="48" height="48" viewBox="0 0 24 24" class="ic-icon text-white">
+            <circle cx="12" cy="12" r="11" class="ic-ring" />
+            <path d="M12 6a4 4 0 0 0-4 4c0 3 4 8 4 8s4-5 4-8a4 4 0 0 0-4-4z" />
+            <circle cx="12" cy="10" r="1.5" fill="currentColor" />
+          </svg>
+          <span class="text-xs uppercase tracking-widest font-bold">The Venue</span>
+        </div>
+
+        <!-- Wine/Drink Icon -->
+        <div class="bg-white/5 p-8 rounded-2xl flex flex-col items-center gap-4 group transition-all hover:bg-white/10">
+          <svg width="48" height="48" viewBox="0 0 24 24" class="ic-icon text-white">
+            <circle cx="12" cy="12" r="11" class="ic-ring" />
+            <path d="M8 5h8l-4 7v5m-3 3h6" />
+            <circle cx="12" cy="12" r="11" stroke-width="0.5" />
+          </svg>
+          <span class="text-xs uppercase tracking-widest font-bold">Cellar List</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Web Components Mockup -->
+    <section id="components">
+      <h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
+        <span class="w-8 h-[1px] bg-white"></span> Web Application
+      </h2>
+      <div class="p-12 border border-white/10 rounded-3xl space-y-12 bg-gradient-to-br from-black to-[#111]">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+          <div class="max-w-md">
+            <h3 class="heading-font text-3xl font-bold mb-4">Join the InnerCircle</h3>
+            <p class="text-white/60 mb-6 italic">Enter your details to receive early access to seasonal tastings and
+              private events.</p>
+            <div class="flex flex-col gap-4">
+              <input type="email" placeholder="Email Address"
+                class="bg-transparent border-b border-white/30 py-3 px-1 focus:outline-none focus:border-white transition-colors">
+              <button
+                class="bg-white text-black py-4 rounded-full font-bold uppercase tracking-widest text-sm hover:bg-gray-200 transition-colors">Request
+                Membership</button>
+            </div>
+          </div>
+          <div
+            class="relative w-full md:w-64 aspect-square border border-white/10 rounded-full flex items-center justify-center">
+            <div
+              class="absolute inset-0 border-2 border-dashed border-white/5 rounded-full animate-[spin_20s_linear_infinite]">
+            </div>
+            <div class="text-center">
+              <span class="block text-4xl font-bold heading-font">04</span>
+              <span class="text-[10px] uppercase tracking-[0.3em] text-white/40">Tables Left</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer
+    class="max-w-6xl mx-auto mt-24 pt-12 border-t border-white/10 flex justify-between items-center text-white/30 text-xs">
+    <p>&copy; 2024 InnerCircle Concept. All Rights Reserved.</p>
+    <div class="flex gap-4">
+      <span class="hover:text-white cursor-pointer">Instagram</span>
+      <span class="hover:text-white cursor-pointer">Privacy Policy</span>
+    </div>
+  </footer>
+
+</body>
+
+</html>
